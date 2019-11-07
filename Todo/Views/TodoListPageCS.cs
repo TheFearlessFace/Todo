@@ -26,7 +26,22 @@ namespace Todo
 			};
 			ToolbarItems.Add(toolbarItem);
 
-			listView = new ListView
+            var toolbarItemSave = new ToolbarItem
+            {
+                Text = "save",
+                IconImageSource = Device.RuntimePlatform == Device.iOS ? null : "tick.png"
+            };
+            toolbarItem.Clicked += async (sender, e) =>
+            {
+                await Navigation.PopAsync();
+                //await Navigation.PushAsync(new TodoItemPageCS
+                //{
+                //    BindingContext = new TodoItem()
+                //});
+            };
+            ToolbarItems.Add(toolbarItem);
+
+            listView = new ListView
 			{
 				Margin = new Thickness(20),
 				ItemTemplate = new DataTemplate(() =>

@@ -19,7 +19,7 @@ namespace Todo
 			((App)App.Current).ResumeAtTodoId = -1;
 			listView.ItemsSource = await App.Database.GetItemsAsync();
 		}
-
+        //todo: add button for new TodoList
 		async void OnItemAdded(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new TodoItemPage
@@ -31,7 +31,7 @@ namespace Todo
 		async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
             //((App)App.Current).ResumeAtTodoId = (e.SelectedItem as TodoItem).ID;
-            //Debug.WriteLine("setting ResumeAtTodoId = " + (e.SelectedItem as TodoItem).ID);
+            Debug.WriteLine("setting ResumeAtTodoId = " + (e.SelectedItem as TodoItem).ID);
             if (e.SelectedItem != null)
             {
                 await Navigation.PushAsync(new TodoItemPage
@@ -40,5 +40,22 @@ namespace Todo
                 });
             }
 		}
-	}
+        async void OnSaveClicked(object sender, EventArgs e)
+        {
+            var todoItem = (TodoList)BindingContext;
+            await App.Database.SaveItemAsync(todoItem);
+            await Navigation.PopAsync();
+        }
+
+        async void OnCancelClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+        async void OnDeleteClicked(object sender, EventArgs e)
+        {
+            var todoItem = (TodoList)BindingContext;
+            await App.Database.DeleteItemAsync(todoItem);
+            await Navigation.PopAsync();
+        }
+    }
 }

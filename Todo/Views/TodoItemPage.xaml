@@ -7,7 +7,9 @@
 		<Entry Text="{Binding Notes}" />
 		<Label Text="Done" />
 		<Switch IsToggled="{Binding Done}" />
-		<Button Text="Save" Clicked="OnSaveClicked" />
+        <Label Text="TodoListId" />
+        <Label Text="{Binding TodoListId}" />
+        <Button Text="Save" Clicked="OnSaveClicked" />
 		<Button Text="Delete" Clicked="OnDeleteClicked" />
 		<Button Text="Cancel" Clicked="OnCancelClicked" />
 		<Button Text="Speak" Clicked="OnSpeakClicked" />

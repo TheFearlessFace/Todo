@@ -9,6 +9,7 @@ namespace Todo
 		public string Name { get; set; }
 		public string Notes { get; set; }
 		public bool Done { get; set; }
+        public int TodoListId { get; set; }
 	}
 }
 

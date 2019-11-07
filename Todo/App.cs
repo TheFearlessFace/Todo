@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Todo.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Todo
@@ -17,7 +18,7 @@ namespace Todo
 			Resources.Add("primaryGreen", Color.FromHex("91CA47"));
 			Resources.Add("primaryDarkGreen", Color.FromHex("6FA22E"));
 
-			var nav = new NavigationPage(new TodoListPage());
+			var nav = new NavigationPage(new MainPage());
 			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];
 			nav.BarTextColor = Color.White;
 
@@ -38,7 +39,9 @@ namespace Todo
 
 		public int ResumeAtTodoId { get; set; }
 
-		protected override void OnStart()
+        public int ResumeAtTodoListId { get; set; }
+
+        protected override void OnStart()
 		{
 			//Debug.WriteLine("OnStart");
 

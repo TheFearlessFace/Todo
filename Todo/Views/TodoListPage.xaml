@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Todo.TodoListPage" Title="Todo">
-	<ContentPage.ToolbarItems>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Todo.TodoListPage" Title="{Binding Name}" 
+             Padding="0" 
+             MinimumWidthRequest="-1">
+
+    <StackLayout  Margin="20" VerticalOptions="StartAndExpand">
+
+    <!--<ContentPage.ToolbarItems>
 		<ToolbarItem Text="+" Clicked="OnItemAdded">
-			<ToolbarItem.IconImageSource>
-				<OnPlatform x:TypeArguments="ImageSource">
-        <On Platform="Android, UWP" Value="plus.png" />
-    </OnPlatform>
-			</ToolbarItem.IconImageSource>
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP" Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
 		</ToolbarItem>
-	</ContentPage.ToolbarItems>
-	<ListView x:Name="listView" Margin="20" ItemSelected="OnListItemSelected">
+        <ToolbarItem Text="save" Clicked="OnSaveClicked">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP" Value="check.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>-->
+        <Label Text="Name" />
+        <Entry Text="{Binding Name}" />
+        <ListView x:Name="listView" Margin="20" ItemSelected="OnListItemSelected">
 		<ListView.ItemTemplate>
 			<DataTemplate>
 				<ViewCell>
@@ -21,4 +37,10 @@
 			</DataTemplate>
 		</ListView.ItemTemplate>
 	</ListView>
+        <Button Text="Add" Clicked="OnItemAdded" />
+    <Button Text="Delete" Clicked="OnDeleteClicked" />
+    <Button Text="Cancel" Clicked="OnCancelClicked" />
+        <Button Text="Save" Clicked="OnSaveClicked" />
+    </StackLayout>
+
 </ContentPage>

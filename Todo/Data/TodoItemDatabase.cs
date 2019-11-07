@@ -11,7 +11,8 @@ namespace Todo
 		public TodoItemDatabase(string dbPath)
 		{
 			database = new SQLiteAsyncConnection(dbPath);
-			database.CreateTableAsync<TodoItem>().Wait();
+            database.CreateTableAsync<TodoList>().Wait();
+            database.CreateTableAsync<TodoItem>().Wait();
 		}
 
 		public Task<List<TodoItem>> GetItemsAsync()
@@ -19,7 +20,12 @@ namespace Todo
 			return database.Table<TodoItem>().ToListAsync();
 		}
 
-		public Task<List<TodoItem>> GetItemsNotDoneAsync()
+        public Task<List<TodoList>> GetTodoListAsync()
+        {
+            return database.Table<TodoList>().ToListAsync();
+        }
+
+        public Task<List<TodoItem>> GetItemsNotDoneAsync()
 		{
 			return database.QueryAsync<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
 		}
@@ -40,10 +46,26 @@ namespace Todo
 			}
 		}
 
-		public Task<int> DeleteItemAsync(TodoItem item)
+        public Task<int> SaveItemAsync(TodoList item)
+        {
+            if (item.ID != 0)
+            {
+                return database.UpdateAsync(item);
+            }
+            else
+            {
+                return database.InsertAsync(item);
+            }
+        }
+
+        public Task<int> DeleteItemAsync(TodoItem item)
 		{
 			return database.DeleteAsync(item);
 		}
-	}
+        public Task<int> DeleteItemAsync(TodoList item)
+        {
+            return database.DeleteAsync(item);
+        }
+    }
 }
 
