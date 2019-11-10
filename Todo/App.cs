@@ -15,10 +15,10 @@ namespace Todo
 		public App()
 		{
 			Resources = new ResourceDictionary();
-			Resources.Add("primaryGreen", Color.FromHex("91CA47"));
-			Resources.Add("primaryDarkGreen", Color.FromHex("6FA22E"));
+            Resources.Add("primaryGreen", Color.FromHex("61CDFF"));// "91CA47"));
+			Resources.Add("primaryDarkGreen", Color.FromHex("2E91A2"));//6FA22E
 
-			var nav = new NavigationPage(new MainPage());
+            var nav = new NavigationPage(new MainPage());
 			nav.BarBackgroundColor = (Color)App.Current.Resources["primaryGreen"];
 			nav.BarTextColor = Color.White;
 

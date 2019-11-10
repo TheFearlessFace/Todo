@@ -5,15 +5,25 @@ namespace Todo
 {
 	public partial class TodoItemPage : ContentPage
 	{
-		public TodoItemPage()
+        public TodoList todoList;
+		public TodoItemPage(TodoList todoList)
 		{
+            this.todoList = todoList;
 			InitializeComponent();
 		}
 
 		async void OnSaveClicked(object sender, EventArgs e)
 		{
 			var todoItem = (TodoItem)BindingContext;
-			await App.Database.SaveItemAsync(todoItem);
+            if (todoList != null)
+            {
+                todoItem.TodoListId = todoList.ID;
+               
+                await App.Database.SaveItemAsync(todoItem);
+                //Check if all items are done, if they are then set todoList.Done = true else false
+                todoList.Done = App.Database.IsItemsDoneByTodoListIdAsync(todoList.ID);
+                await App.Database.SaveItemAsync(todoList);
+            }
 			await Navigation.PopAsync();
 		}
 

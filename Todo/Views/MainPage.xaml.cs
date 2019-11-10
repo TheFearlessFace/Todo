@@ -13,6 +13,7 @@ namespace Todo.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
+        TodoList todoList;
         public MainPage()
         {
             InitializeComponent();
@@ -28,9 +29,21 @@ namespace Todo.Views
 
         async void OnListAdded(object sender, EventArgs e)
         {
+            if (todoList == null)
+                todoList = new TodoList();
+            //Change ID, because SQLite does not  autoincrement, even though the [autoincrement...] is set.
+            int count =  App.Database.GetTodoListAsync().Result.Count();
+            if (todoList.ID < count + 1)
+            {
+                todoList.ID = count + 1;
+            }
+            todoList.Name = String.Empty;
+            //insert new todoList
+            await App.Database.InsertItemAsync(todoList);
+
             await Navigation.PushAsync(new TodoListPage
             {
-                BindingContext = new TodoList()
+                BindingContext = todoList
             });
         }
 
@@ -38,9 +51,19 @@ namespace Todo.Views
         {
             //((App)App.Current).ResumeAtTodoListId = (e.SelectedItem as TodoList).ID;
             Debug.WriteLine("setting ResumeAtTodoListId = " + (e.SelectedItem as TodoList).ID);
-            if (e.SelectedItem != null)
+            //todoList = e.SelectedItem as TodoList;
+            if (todoList == null)
             {
-                await Navigation.PushAsync(new TodoListPage
+                todoList = new TodoList();
+            }
+            if (todoList != null && e.SelectedItem != null)
+            {
+                todoList.ID = (e.SelectedItem as TodoList).ID;
+                todoList.Name = (e.SelectedItem as TodoList).Name;
+                todoList.Date = (e.SelectedItem as TodoList).Date;
+                todoList.Done = (e.SelectedItem as TodoList).Done;
+
+                await Navigation.PushAsync(new TodoListPage(todoList)
                 {
                     BindingContext = e.SelectedItem as TodoList
                 });

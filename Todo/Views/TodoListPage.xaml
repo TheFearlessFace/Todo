@@ -25,14 +25,16 @@
     </ContentPage.ToolbarItems>-->
         <Label Text="Name" />
         <Entry Text="{Binding Name}" />
+        <Label Text="List is Empty" IsVisible="False"/>
         <ListView x:Name="listView" Margin="20" ItemSelected="OnListItemSelected">
 		<ListView.ItemTemplate>
 			<DataTemplate>
 				<ViewCell>
 					<StackLayout Margin="20,0,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 						<Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" />
-						<Image Source="check.png" HorizontalOptions="End" IsVisible="{Binding Done}" />
-					</StackLayout>
+                        <!--<Label Text="{Binding ID}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" />-->
+                        <Image Source="tick.png" HorizontalOptions="End" IsVisible="{Binding Done}" />
+                    </StackLayout>
 				</ViewCell>
 			</DataTemplate>
 		</ListView.ItemTemplate>
