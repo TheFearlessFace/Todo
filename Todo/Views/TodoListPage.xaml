@@ -41,7 +41,7 @@
 	</ListView>
         <Button Text="Add" Clicked="OnItemAdded" />
     <Button Text="Delete" Clicked="OnDeleteClicked" />
-    <Button Text="Cancel" Clicked="OnCancelClicked" />
+    <!--<Button Text="Cancel" Clicked="OnCancelClicked" />-->
         <Button Text="Save" Clicked="OnSaveClicked" />
     </StackLayout>
 

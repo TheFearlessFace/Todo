@@ -46,8 +46,15 @@ namespace Todo.Views
                 BindingContext = todoList
             });
         }
+        async void AboutSelected(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AboutPage
+            {
+                //BindingContext = todoList
+            });
+        }
 
-        async void OnListSelected(object sender, SelectedItemChangedEventArgs e)
+            async void OnListSelected(object sender, SelectedItemChangedEventArgs e)
         {
             //((App)App.Current).ResumeAtTodoListId = (e.SelectedItem as TodoList).ID;
             Debug.WriteLine("setting ResumeAtTodoListId = " + (e.SelectedItem as TodoList).ID);

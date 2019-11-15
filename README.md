@@ -14,7 +14,8 @@ This sample demonstrates a Todo list application where the data is stored and ac
 
 The app functionality is:
 
-- View a list of tasks.
+- View a list of task lists.
+- View a list of tasks by selecting a task list.
 - Add a new item to the list of tasks.
 - Set a task's status to 'completed'.
 

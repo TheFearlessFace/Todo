@@ -6,6 +6,20 @@
              mc:Ignorable="d"
              x:Class="Todo.Views.MainPage">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="i" Clicked="AboutSelected" >
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP" Value="i.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Text="                           " >
+            <!--<ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP"  />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>-->
+        </ToolbarItem>
         <ToolbarItem Text="+" Clicked="OnListAdded">
             <ToolbarItem.IconImageSource>
                 <OnPlatform x:TypeArguments="ImageSource">
